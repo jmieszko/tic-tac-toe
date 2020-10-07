@@ -1,0 +1,56 @@
+body{
+    background-color: rgb(122, 255, 151);
+
+
+}
+
+.tttbox{
+    width: 75px;
+    height: 75px;
+    background: white;
+    border-style: solid;
+    border-width: 5px;
+        
+    
+}
+
+.new{
+    width: 100px;
+    height: 50px;
+
+}
+
+.playerTurn{
+    width: 200px;
+    height: 100px;
+    font-size: 20px;
+    text-align: left;
+    text
+    border-style: solid;
+    border-width: 1px;
+    background: white;
+}
+
+.wideHeader{
+    width: 100px;
+    height: 30px;
+    font-size: 20px;
+    text-align: center;
+    border-style: solid;
+    border-width: 1px;
+    background: white;
+}
+
+.narrowHeader{
+    width: 50px;
+    height: 30px;
+    font-size: 28px;
+    text-align: center;
+    border-style: solid;
+    border-width: 1px;
+    background: white;
+}
+
+#messages{
+    height: 250px;
+}
