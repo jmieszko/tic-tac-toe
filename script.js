@@ -43,6 +43,7 @@ function takeTurn(selectedButton){ //Takes id of selected tile
         }
         console.log("turnsPlayed in takeTurn() after switch = ", turnsPlayed);
    turnsPlayed++; 
+   console.log("turnsPlayed in takeTurn() after switch = and increment ", turnsPlayed);
 }
 
 }
@@ -83,7 +84,7 @@ function validateWinner(player){
             break;
         }
         else{      
-            if(turnsPlayed>=9){
+            if(turnsPlayed>=8){
                 finishGame('tie')
               //do nothing and go back to taking a turn
               console.log("turnsPlayed in validateWinner() for else = ", turnsPlayed);
@@ -94,13 +95,24 @@ function validateWinner(player){
 
 function finishGame(result){
     console.log("turnsPlayed in finishGame() beginning = ", turnsPlayed);
-    if(result=="win"){
-        console.log(`Game over. ${whoseTurn[turnsPlayed]} wins!`);
-        console.log("turnsPlayed in finishGame() if = ", turnsPlayed);
+
+    switch(result){
+        case 'win':
+            alert(`Game over. ${whoseTurn[turnsPlayed]} wins!`);
+            console.log("turnsPlayed in finishGame() if = ", turnsPlayed);
+            break;
+        
+        case 'tie':
+            alert(`Tie game`);
+            break;
     }
-    else{
-        console.log("Tie game");
-    }
+    // if(result=="win"){
+    //     alert(`Game over. ${whoseTurn[turnsPlayed]} wins!`);
+    //     console.log("turnsPlayed in finishGame() if = ", turnsPlayed);
+    // }
+    // else{
+    //     console.log("Tie game");
+    // }
     console.log("turnsPlayed in finishGame() before resetting to 0 = ", turnsPlayed);
     gamesPlayed++; //increments played Games counter
     turnsPlayed=0; //resets turns played to 0.
