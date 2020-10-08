@@ -8,6 +8,9 @@
 </head>
 <body>
     <div class="gameBoard">
+        <div class="gameBoard">
+    <div class="messageBox">Player Turn</div><br>
+    <div class="tileBoard">
     <section>
     <div class="tttbox" id="a"></div><br>
     <div class="tttbox" id="b"></div><br>
@@ -23,16 +26,20 @@
     <div class="tttbox" id="i"></div><br>
     </section>
     </div>
-    <div class="playerTurn">Player Turn: </div><br>
+    <input class="new" type="button" value="New game">
+</div>
+    <div class="wideHeader" id="wins">Wins</div>
     <div class="narrowHeader" id="x">X</div>
     <div class="narrowHeader" id="o">O</div>
+    <div></div>
     <div class="narrowHeader" id="xWins">4</div>
     <div class="narrowHeader" id="oWins">1</div>
-    <div class="wideHeader" id="wins">Wins</div>
-    <div class="wideHeader" id="ties">Ties</div><br>
+    
+    <div class="wideHeader" id="ties">Ties: </div><br>
     <div class="wideHeader" id="lastWinner">Last Winner</div><br>
-    <div class="wideHeader" id="messages">Messages</div>
-    <input class="new" type="button" value="New game">
+  <!--  <div class="wideHeader" id="messages">Messages</div>-->
+    
+    </div>
     
  <script src="script.js"></script>   
 </body>
