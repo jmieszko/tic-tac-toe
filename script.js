@@ -16,6 +16,9 @@ function startGame(){
         document.querySelectorAll('.tttbox')[i].style.background='white';
     }
     gameInProgress = true;
+    turnsPlayed = 0;
+    xChoices=[];
+    oChoices=[];
     console.log("turnsPlayed in startGame()= ", turnsPlayed);
     //Assign playerTurn box color to be for x
 }
@@ -88,6 +91,7 @@ function validateWinner(player){
                 finishGame('tie')
               //do nothing and go back to taking a turn
               console.log("turnsPlayed in validateWinner() for else = ", turnsPlayed);
+              break;
             }
         }
     }
@@ -104,6 +108,7 @@ function finishGame(result){
         
         case 'tie':
             alert(`Tie game`);
+            console.log('tie game');
             break;
     }
     // if(result=="win"){
@@ -115,7 +120,6 @@ function finishGame(result){
     // }
     console.log("turnsPlayed in finishGame() before resetting to 0 = ", turnsPlayed);
     gamesPlayed++; //increments played Games counter
-    turnsPlayed=0; //resets turns played to 0.
     gameInProgress=false;
 }
 
