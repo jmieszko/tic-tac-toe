@@ -1,5 +1,5 @@
 body{
-   background-color: rgb(122, 255, 151);
+   background: rgb(122, 255, 151);
 }
 .playBoard{
     flex-direction:row;

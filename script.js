@@ -27,33 +27,43 @@ function startGame(){
 }
 
 
-function takeTurn(selectedButton){ //Takes id of selected tile
-    // console.log(document.querySelector(`#${selectedButton}`));
-  //  console.log("turnsPlayed in takeTurn() beginning = ", turnsPlayed);
-    console.log(gameInProgress);
-    if(!gameInProgress){ //Validates that a game has not already started. If a game hasn't started, start a game.
+function takeTurn(selectedButton){ //Takes id of selected tile and updates the color appropriately
+    
+   if(validateTile(selectedButton)){ //If the selected tile wasn't previously selected, do the following
+    
+   if(!gameInProgress){ //Validates that a game has not already started. If a game hast started, alert the user.
         alert('Game is over.  Click on New Game to start.');
         return;
-    } 
-    else{ //If a game has already started
+    }
 
+    else{ //If a game has already started
+        
         switch(whoseTurn[turnsPlayed]){
             case 'x':
-
-                selectedButton.setAttribute('style','background-color: rgb(230, 210, 182);');
+                selectedButton.setAttribute('style','background: rgb(230, 210, 182);');
                 recordTurn('x', selectedButton.id);
             break;
 
             case 'o':
-                selectedButton.setAttribute('style','background-color: rgb(0, 0, 255);');
+                selectedButton.setAttribute('style','background: rgb(0, 0, 255);');
                 recordTurn('o', selectedButton.id);
             break;
         }
-   //     console.log("turnsPlayed in takeTurn() after switch = ", turnsPlayed);
-   turnsPlayed++; 
-  // console.log("turnsPlayed in takeTurn() after switch = and increment ", turnsPlayed);
+   
+   turnsPlayed++; //Increment this to ensure that the turn was taken
+  
 }
 
+}
+else {} //If the tile was previously selected, then do nothing, not even increment the turn counter
+}
+
+function validateTile(tile){ //Ensures that the selected tile wasn't previously selected
+     if(tile.style.background!="white") {
+         alert('Cannot select this tile.  Choose another')
+         return false;
+     }
+     else return true;
 }
 
 function recordTurn(player, choice){
