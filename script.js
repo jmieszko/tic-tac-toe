@@ -16,25 +16,27 @@ function startGame(){
         document.querySelectorAll('.tttbox')[i].style.background='white';
     }
     gameInProgress = true;
-    turnsPlayed = 0;
-    xChoices=[];
-    oChoices=[];
-    console.log("turnsPlayed in startGame()= ", turnsPlayed);
+    turnsPlayed = 0; //resets the turn count
+    xChoices=[]; //Initialize the choices on new game
+    oChoices=[]; //Initialize the choices on new game
+   // console.log("turnsPlayed in startGame()= ", turnsPlayed);
     //Assign playerTurn box color to be for x
 }
 
 
 function takeTurn(selectedButton){ //Takes id of selected tile
-    console.log("turnsPlayed in takeTurn() beginning = ", turnsPlayed);
+    // console.log(document.querySelector(`#${selectedButton}`));
+  //  console.log("turnsPlayed in takeTurn() beginning = ", turnsPlayed);
     console.log(gameInProgress);
     if(!gameInProgress){ //Validates that a game has not already started. If a game hasn't started, start a game.
-        alert('Click on New Game to start new game');
+        alert('Game is over.  Click on New Game to start.');
         return;
     } 
     else{ //If a game has already started
 
         switch(whoseTurn[turnsPlayed]){
             case 'x':
+
                 selectedButton.setAttribute('style','background-color: rgb(230, 210, 182);');
                 recordTurn('x', selectedButton.id);
             break;
@@ -44,42 +46,47 @@ function takeTurn(selectedButton){ //Takes id of selected tile
                 recordTurn('o', selectedButton.id);
             break;
         }
-        console.log("turnsPlayed in takeTurn() after switch = ", turnsPlayed);
+   //     console.log("turnsPlayed in takeTurn() after switch = ", turnsPlayed);
    turnsPlayed++; 
-   console.log("turnsPlayed in takeTurn() after switch = and increment ", turnsPlayed);
+  // console.log("turnsPlayed in takeTurn() after switch = and increment ", turnsPlayed);
 }
 
 }
 
 function recordTurn(player, choice){
-    console.log("turnsPlayed in recordTurn() beginning = ", turnsPlayed);
+//console.log("turnsPlayed in recordTurn() beginning = ", turnsPlayed);
 switch (player){
     case 'x':
         xChoices[turnsPlayed] = choice;
+        console.log("xChoices=", xChoices);
         xChoices.sort();
-        xChoices.length=3;
+        //xChoices.length=3;
         console.log("xChoices=", xChoices);
         validateWinner(xChoices);
     break;
     
     case 'o':
         oChoices[turnsPlayed] = choice;
+        console.log("oChoices=", oChoices);
         oChoices.sort();
-        oChoices.length=3;
+       // oChoices.length=3;
         console.log("oChoices=", oChoices);
         validateWinner(oChoices);
     break;
     
         
 }
-console.log("turnsPlayed in recordTurn() after switch = ", turnsPlayed);
+//console.log("turnsPlayed in recordTurn() after switch = ", turnsPlayed);
 }
 
-function validateWinner(player){
-    console.log("turnsPlayed in validateWinner() beginning = ", turnsPlayed);
+function validateWinner(player){ //Compares player's choices to winning combos and determines if there's a winner or, if no matches, a tie
+   // console.log("turnsPlayed in validateWinner() beginning = ", turnsPlayed);
     player = player.toString(); //converts player's choices to a string
     player=player.replaceAll(',',''); //removes ',' from player's choices
-    
+    let play=player.splice(0,1); //gets first two choices from player's choice list.
+    console.log("xC= ",xChoices, '\n', "oC= ", oChoices);
+    console.log(player);
+
     for(let i=0; i<winners.length; i++){ //compares player's choices to the winning combos array
         if(player==winners[i]){ //if there is a match
             
@@ -90,7 +97,7 @@ function validateWinner(player){
             if(turnsPlayed>=8){
                 finishGame('tie')
               //do nothing and go back to taking a turn
-              console.log("turnsPlayed in validateWinner() for else = ", turnsPlayed);
+   //           console.log("turnsPlayed in validateWinner() for else = ", turnsPlayed);
               break;
             }
         }
@@ -98,12 +105,12 @@ function validateWinner(player){
 }
 
 function finishGame(result){
-    console.log("turnsPlayed in finishGame() beginning = ", turnsPlayed);
+  //  console.log("turnsPlayed in finishGame() beginning = ", turnsPlayed);
 
     switch(result){
         case 'win':
             alert(`Game over. ${whoseTurn[turnsPlayed]} wins!`);
-            console.log("turnsPlayed in finishGame() if = ", turnsPlayed);
+   //         console.log("turnsPlayed in finishGame() if = ", turnsPlayed);
             break;
         
         case 'tie':
@@ -118,7 +125,7 @@ function finishGame(result){
     // else{
     //     console.log("Tie game");
     // }
-    console.log("turnsPlayed in finishGame() before resetting to 0 = ", turnsPlayed);
+  //  console.log("turnsPlayed in finishGame() before resetting to 0 = ", turnsPlayed);
     gamesPlayed++; //increments played Games counter
     gameInProgress=false;
 }
