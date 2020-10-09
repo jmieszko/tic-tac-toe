@@ -9,7 +9,8 @@ let xChoices = []; //x's choices which will be used to compare against winners
 let oChoices = []; //o's choices which will be used to compare against winners
 
 
-let winners = ['abc', 'def', 'ghi', 'aei', 'ceg', 'adg', 'beh', 'cfi'] //Sorted alphabetically
+let winners = ["abc", "adg", "aei", "beh", "ceg", "cfi", "def", "ghi"] //Sorted alphabetically
+
 
 function startGame(){
     for(let i=0;i<document.querySelectorAll('.tttbox').length; i++){
@@ -83,15 +84,27 @@ function validateWinner(player){ //Compares player's choices to winning combos a
    // console.log("turnsPlayed in validateWinner() beginning = ", turnsPlayed);
     player = player.toString(); //converts player's choices to a string
     player=player.replaceAll(',',''); //removes ',' from player's choices
-    let play=player.splice(0,1); //gets first two choices from player's choice list.
-    console.log("xC= ",xChoices, '\n', "oC= ", oChoices);
-    console.log(player);
+    let play=player.slice(0,2); //gets first two choices from player's choice list.
+    console.log("Play before for= ", `${play}`);
+    // console.log("xC= ",xChoices, '\n', "oC= ", oChoices);
+    // console.log(player);
+    for(let k=1;k<player.length;k++){
+        console.log(player.slice(k))
+    }
 
     for(let i=0; i<winners.length; i++){ //compares player's choices to the winning combos array
-        if(player==winners[i]){ //if there is a match
-            
-            finishGame('win'); //proceed to end game with win condition
+    // console.log("Play=",play);
+     console.log(winners[i].toString().slice(2))
+        if(play===winners[i].slice(0,2)){ //if there is a match of at least the first two choices to the first two choices of a winner
+            console.log("Play= ",play, "winners= ", winners[i], "player=",player);
+            for(let j=2;j<player.length; j++){
+                console.log("i=", i, "j=", j, "Player slice=",player.slice(j,j+1), "Winners i slice =", winners[i].toString().slice(2));//.toString().slice(2));
+                if(player.slice(j,j+1)==winners[i].toString().slice(2)){
+                    finishGame('win'); //proceed to end game with win condition
             break;
+                }
+            }
+            
         }
         else{      
             if(turnsPlayed>=8){
