@@ -3,13 +3,15 @@ let gamesPlayed =0; //running tally of number of games played
 let turnsPlayed =0; //running tally of number of turns in a given game
 let gameInProgress = false; //Used to ensure a new game doesn't start when one's already in progress
 let squarePlayed = false; //Used to validate whether a tile was already selected
-
+// let middleSquare = false; //Used in validating winners involving middle square
 let whoseTurn = ['x','o','x','o','x','o','x','o','x'] //keeps track of whose turn. X always begins a new game.
 let xChoices = []; //x's choices which will be used to compare against winners
 let oChoices = []; //o's choices which will be used to compare against winners
 
 
 let winners = ["abc", "adg", "aei", "beh", "ceg", "cfi", "def", "ghi"] //Sorted alphabetically
+let winnersEdge = ["abc", "adg", "cfi", "ghi"];
+let winnersMiddle=["aei","beh","ceg","def"];
 
 
 function startGame(){
@@ -59,6 +61,7 @@ function recordTurn(player, choice){
 switch (player){
     case 'x':
         xChoices[turnsPlayed] = choice;
+       // if(choice=='e') middleSquare=true;
         console.log("xChoices=", xChoices);
         xChoices.sort();
         //xChoices.length=3;
@@ -68,6 +71,7 @@ switch (player){
     
     case 'o':
         oChoices[turnsPlayed] = choice;
+      //  if(choice=='e') middleSquare=true;
         console.log("oChoices=", oChoices);
         oChoices.sort();
        // oChoices.length=3;
@@ -81,10 +85,15 @@ switch (player){
 }
 
 function validateWinner(player){ //Compares player's choices to winning combos and determines if there's a winner or, if no matches, a tie
+    
+
+    
    // console.log("turnsPlayed in validateWinner() beginning = ", turnsPlayed);
     player = player.toString(); //converts player's choices to a string
     player=player.replaceAll(',',''); //removes ',' from player's choices
+    let playerNoE=player.replaceAll('e','');
     let play=player.slice(0,2); //gets first two choices from player's choice list.
+    let playerNoEPlay=playerNoE.slice(0,2);
     console.log("Play before for= ", `${play}`);
     // console.log("xC= ",xChoices, '\n', "oC= ", oChoices);
     // console.log(player);
@@ -95,11 +104,11 @@ function validateWinner(player){ //Compares player's choices to winning combos a
     for(let i=0; i<winners.length; i++){ //compares player's choices to the winning combos array
     // console.log("Play=",play);
      console.log(winners[i].toString().slice(2))
-        if(play===winners[i].slice(0,2)){ //if there is a match of at least the first two choices to the first two choices of a winner
+        if(play===winners[i].slice(0,2) || playerNoEPlay===winners[i].slice(0,2)){ //if there is a match of at least the first two choices to the first two choices of a winner
             console.log("Play= ",play, "winners= ", winners[i], "player=",player);
             for(let j=2;j<player.length; j++){
                 console.log("i=", i, "j=", j, "Player slice=",player.slice(j,j+1), "Winners i slice =", winners[i].toString().slice(2));//.toString().slice(2));
-                if(player.slice(j,j+1)==winners[i].toString().slice(2)){
+                if(player.slice(j,j+1)==winners[i].toString().slice(2) || playerNoE.slice(j,j+1)==winners[i].toString().slice(2)){
                     finishGame('win'); //proceed to end game with win condition
             break;
                 }
