@@ -8,6 +8,9 @@ let choices = []; //choices, by player, which will be used to compare against wi
 let winners = [ [0,1,2], [0,4,8], [0,3,6], [1,4,7], [2,5,8], [3,4,5], [6,7,8], [2,4,6]]; //winning combinations of tiles by index.
 let win = false; //Used later to determine on last turn if the game is a tie
 
+let xWins = 0; //Number of games X won
+let oWins = 0; //Number of games O won
+
 function startGame() {
   for (let i = 0; i < document.querySelectorAll(".tttbox").length; i++) {
     document.querySelectorAll(".tttbox")[i].style.background = "white"; //Resets the color of all tiles to white
@@ -16,7 +19,7 @@ function startGame() {
   turnsPlayed = 0; //resets the turn count
   choices = []; //Initialize the choices on new game
   win=false;
-  
+  displayCounter();
 }
 
 function takeTurn(selectedButton, pos) { //Takes in the ID and position of the tile.
@@ -106,7 +109,12 @@ function finishGame(result) {
   switch (result) {
     case "win":
       alert(`Game over. ${whoseTurn[turnsPlayed].toUpperCase()} wins!`); //Notifies if "X" or "O" wins
-      win=true;
+      win=true; //set win condition to be true as it's not a tie
+      
+      if(whoseTurn[turnsPlayed] == 'x'){ //If X wins, increment X's win counter.
+          xWins++;
+      }
+      else {oWins++;} //If O wins, increment O's win counter.
       break;
 
     case "tie":
@@ -114,6 +122,15 @@ function finishGame(result) {
       break;
   }
   gameInProgress = false; //Resets the game flag to false so that a new game can begin
+  gamesPlayed++; //Increments the number of games played.
+  displayCounter();
+  
+}
+
+function displayCounter(){
+    document.querySelector('#xWins').innerText=`X has won ${xWins} games.`;
+    document.querySelector('#oWins').innerText=`O has won ${oWins} games.`;
+    document.querySelector('#gamesPlayed').innerText=`${gamesPlayed} games have been played.`;
 }
 
 //When New Game button is selected, a new game is initiated
