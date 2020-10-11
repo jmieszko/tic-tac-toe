@@ -6,7 +6,7 @@ let squarePlayed = false; //Used to validate whether a tile was already selected
 let whoseTurn = ["x", "o", "x", "o", "x", "o", "x", "o", "x"]; //keeps track of whose turn. X always begins a new game.
 let choices = []; //x's choices which will be used to compare against winners
 let winners = [ [0,1,2], [0,4,8], [0,3,6], [1,4,7],   [2,5,8],   [3,4,5],   [6,7,8],   [2,4,6]]; //o's choices which will be used to compare against winners
-
+let win = false;
 
 function startGame() {
   for (let i = 0; i < document.querySelectorAll(".tttbox").length; i++) {
@@ -65,6 +65,7 @@ function validateTile(tile) {
 
 function recordTurn(player, choice, pos) {
  // console.log(player,choice,posX,posY,xChoices)
+ 
   switch (player) {
     case "x":
       choices[pos] = player;
@@ -85,8 +86,8 @@ function recordTurn(player, choice, pos) {
 }
 
 function validateWinner() {
-    console.log(turnsPlayed, choices)
-    let result;
+    console.log(turnsPlayed, choices, win)
+ // let win=false;
    // let matches;
   //Compares player's choices to winning combos and determines if there's a winner or, if no matches, a tie
 
@@ -100,6 +101,7 @@ function validateWinner() {
             && choices[path[0]] === choices[path[1]]
             && choices[path[0]] === choices[path[2]])
             finishGame("win");
+            
        })
     }
        
@@ -113,10 +115,8 @@ function validateWinner() {
 //   }
 //if(matches == 3) finishGame("win");
 
-if(result=="win"){
-    finishGame("win");
-}
-  if(turnsPlayed>=8){
+//console.log(win);
+  if(turnsPlayed>=8 && !win){
       finishGame("tie");
   }
   else {}
@@ -128,6 +128,7 @@ function finishGame(result) {
   switch (result) {
     case "win":
       alert(`Game over. ${whoseTurn[turnsPlayed]} wins!`);
+      win=true;
       //         console.log("turnsPlayed in finishGame() if = ", turnsPlayed);
       break;
 
