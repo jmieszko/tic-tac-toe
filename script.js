@@ -15,6 +15,7 @@ function startGame() {
   gameInProgress = true;
   turnsPlayed = 0; //resets the turn count
   choices = []; //Initialize the choices on new game
+  win=false;
   //oChoices = []; //Initialize the choices on new game
   // console.log("turnsPlayed in startGame()= ", turnsPlayed);
   //Assign playerTurn box color to be for x
