@@ -14,7 +14,7 @@ function startGame() {
   }
   gameInProgress = true;
   turnsPlayed = 0; //resets the turn count
-  xChoices = []; //Initialize the choices on new game
+  choices = []; //Initialize the choices on new game
   //oChoices = []; //Initialize the choices on new game
   // console.log("turnsPlayed in startGame()= ", turnsPlayed);
   //Assign playerTurn box color to be for x
@@ -68,12 +68,7 @@ function recordTurn(player, choice, pos) {
   switch (player) {
     case "x":
       choices[pos] = player;
-      // if(choice=='e') middleSquare=true;
-     // console.log("xChoices=", xChoices);
-     // xChoices.sort();
-      //xChoices.length=3;
-      console.log("Choices=", choices);
-      validateWinner();
+     validateWinner();
       break;
 
     case "o":
@@ -90,7 +85,7 @@ function recordTurn(player, choice, pos) {
 }
 
 function validateWinner() {
-    console.log(choices)
+    console.log(turnsPlayed, choices)
     let result;
    // let matches;
   //Compares player's choices to winning combos and determines if there's a winner or, if no matches, a tie
@@ -100,7 +95,7 @@ function validateWinner() {
   }
   else{
        winners.forEach((path) =>{
-           console.log(winners, path);
+           //console.log(winners, path);
            if(choices[path[0]]
             && choices[path[0]] === choices[path[1]]
             && choices[path[0]] === choices[path[2]])
