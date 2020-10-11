@@ -4,27 +4,24 @@ let turnsPlayed = 0; //running tally of number of turns in a given game
 let gameInProgress = false; //Used to ensure a new game doesn't start when one's already in progress
 let squarePlayed = false; //Used to validate whether a tile was already selected
 let whoseTurn = ["x", "o", "x", "o", "x", "o", "x", "o", "x"]; //keeps track of whose turn. X always begins a new game.
-let choices = []; //x's choices which will be used to compare against winners
-let winners = [ [0,1,2], [0,4,8], [0,3,6], [1,4,7],   [2,5,8],   [3,4,5],   [6,7,8],   [2,4,6]]; //o's choices which will be used to compare against winners
-let win = false;
+let choices = []; //choices, by player, which will be used to compare against winners
+let winners = [ [0,1,2], [0,4,8], [0,3,6], [1,4,7], [2,5,8], [3,4,5], [6,7,8], [2,4,6]]; //winning combinations of tiles by index.
+let win = false; //Used later to determine on last turn if the game is a tie
 
 function startGame() {
   for (let i = 0; i < document.querySelectorAll(".tttbox").length; i++) {
-    document.querySelectorAll(".tttbox")[i].style.background = "white";
+    document.querySelectorAll(".tttbox")[i].style.background = "white"; //Resets the color of all tiles to white
   }
-  gameInProgress = true;
+  gameInProgress = true; //Confirms game is in progress; clicking on New Game produces error
   turnsPlayed = 0; //resets the turn count
   choices = []; //Initialize the choices on new game
   win=false;
-  //oChoices = []; //Initialize the choices on new game
-  // console.log("turnsPlayed in startGame()= ", turnsPlayed);
-  //Assign playerTurn box color to be for x
+  
 }
 
-function takeTurn(selectedButton, pos) {
+function takeTurn(selectedButton, pos) { //Takes in the ID and position of the tile.
   //Takes id of selected tile and updates the color appropriately
-  //console.log(selectedButton.id);
-  if (validateTile(selectedButton)) {
+    if (validateTile(selectedButton)) {
     //If the selected tile wasn't previously selected, do the following
 
     if (!gameInProgress) {
@@ -40,12 +37,12 @@ function takeTurn(selectedButton, pos) {
             "style",
             "background: rgb(230, 210, 182);"
           );
-          recordTurn("x", selectedButton.id, pos);
+          recordTurn("x", pos); //Changes the color of the tile to be that of what X selected
           break;
 
         case "o":
           selectedButton.setAttribute("style", "background: rgb(0, 0, 255);");
-          recordTurn("o", selectedButton.id, pos);
+          recordTurn("o", pos); //Changes the color of the tile to be that of what O selected
           break;
       }
 
@@ -59,46 +56,39 @@ function validateTile(tile) {
   //Ensures that the selected tile wasn't previously selected
   
   if (tile.style.background != "white") {
-    alert('Cannot select this tile.  Choose another or click "New Game."');
+    alert('Cannot select this tile.');
     return false;
   } else return true;
 }
 
-function recordTurn(player, choice, pos) {
- // console.log(player,choice,posX,posY,xChoices)
+function recordTurn(player, pos) {
  
-  switch (player) {
+    switch (player) {
     case "x":
-      choices[pos] = player;
+     choices[pos] = player; //Updates the choices array with X at the position of the tile
      validateWinner();
       break;
 
     case "o":
-      choices[pos] = player;
-      //  if(choice=='e') middleSquare=true;
-     // console.log("oChoices=", oChoices);
-     // oChoices.sort();
-      // oChoices.length=3;
-      //console.log("oChoices=", oChoices);
-      validateWinner(choices);
+      choices[pos] = player; //Updates the choices array with O at the position of the tile
+      validateWinner();
       break;
   }
-  //console.log("turnsPlayed in recordTurn() after switch = ", turnsPlayed);
 }
 
-function validateWinner() {
-    console.log(turnsPlayed, choices, win)
- // let win=false;
-   // let matches;
-  //Compares player's choices to winning combos and determines if there's a winner or, if no matches, a tie
+function validateWinner() { //Compares player's choices to winning combos and determines if there's a winner or, if no matches, a tie
+ //   console.log(turnsPlayed, choices, win)
+ 
+  
 
  if(turnsPlayed<4){
       //Do nothing since there haven't been enough turns played yet to determine a winner
   }
   else{
-       winners.forEach((path) =>{
-           //console.log(winners, path);
-           if(choices[path[0]]
+       winners.forEach((path) =>{ //Looks at each combo in winning array. "Path" represents a winning path
+           //Look at the value of the first winner element and use that to determine the position of the player choice and get its value, which will be either X or O.
+           //For the next two values in that winners element, use those values to find the positions to look at the players choice array.  If they are both the same as the first position (either X or O), then that player made a winning combination.
+           if(choices[path[0]] 
             && choices[path[0]] === choices[path[1]]
             && choices[path[0]] === choices[path[2]])
             finishGame("win");
@@ -106,48 +96,24 @@ function validateWinner() {
        })
     }
        
-//       for(let j=0;j<winnersEdge.length;j++){
-//           if(playerNoE==winnersEdge[j]){
-//               finishGame("win");
-//           }
-//           else {}
-//       }
-
-//   }
-//if(matches == 3) finishGame("win");
-
-//console.log(win);
-  if(turnsPlayed>=8 && !win){
-      finishGame("tie");
+ if(turnsPlayed>=8 && !win){ //If all turns have been played and a winner has not been determined
+      finishGame("tie"); //Consider the game a tie.
   }
   else {}
 }
 
 function finishGame(result) {
-  //  console.log("turnsPlayed in finishGame() beginning = ", turnsPlayed);
-
   switch (result) {
     case "win":
-      alert(`Game over. ${whoseTurn[turnsPlayed]} wins!`);
+      alert(`Game over. ${whoseTurn[turnsPlayed].toUpperCase()} wins!`); //Notifies if "X" or "O" wins
       win=true;
-      //         console.log("turnsPlayed in finishGame() if = ", turnsPlayed);
       break;
 
     case "tie":
-      alert(`Tie game`);
-      console.log("tie game");
+      alert(`Tie game`); //Notifies it's a tie game
       break;
   }
-  // if(result=="win"){
-  //     alert(`Game over. ${whoseTurn[turnsPlayed]} wins!`);
-  //     console.log("turnsPlayed in finishGame() if = ", turnsPlayed);
-  // }
-  // else{
-  //     console.log("Tie game");
-  // }
-  //  console.log("turnsPlayed in finishGame() before resetting to 0 = ", turnsPlayed);
-  gamesPlayed++; //increments played Games counter
-  gameInProgress = false;
+  gameInProgress = false; //Resets the game flag to false so that a new game can begin
 }
 
 //When New Game button is selected, a new game is initiated
