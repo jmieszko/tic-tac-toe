@@ -152,9 +152,11 @@ function finishGame(result) {
 }
 
 function displayCounter(){
-    document.querySelector('#xWins').innerText=`X has won ${xWins} games.`;
-    document.querySelector('#oWins').innerText=`O has won ${oWins} games.`;
-    document.querySelector('#gamesPlayed').innerText=`Games played: ${gamesPlayed}`;
+  let ties=gamesPlayed -xWins - oWins
+    document.querySelector('#xWins').innerHTML=`X: &nbsp ${xWins}`;
+    document.querySelector('#ties').innerHTML=`Ties: ${ties}`;
+    document.querySelector('#oWins').innerHTML=`O: &nbsp ${oWins}`;
+   // document.querySelector('#gamesPlayed').innerHTML=`Games played: &nbsp <big>${gamesPlayed}</big>`;
 }
 
 //When New Game button is selected, a new game is initiated

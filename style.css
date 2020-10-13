@@ -5,6 +5,8 @@ body{
    background-repeat: no-repeat;
    background-size: cover;*/
    display: flex;
+   font-family: verdana;
+   
 }
 .gameBoard{
     flex-direction:column;
@@ -42,13 +44,13 @@ body{
 .new{  /*controls the New Game box*/
     width: 100px;
     height: 50px;
-    
+    font-size: 18px;
     
 }
 
 .messageBox{
     width: 200px;
-    height: 50px;
+    height: 75px;
     font-size: 20px;
     text-align: center;
     border-style: solid;
@@ -59,13 +61,13 @@ body{
 }
 
 .wideHeader{
-    width: 100px;
+    width: 300px;
     height: 30px;
     font-size: 20px;
-    text-align: center;
     border-style: solid;
     border-width: 1px;
-    background: white;
+    background: rgb(0,255,255);
+    
 }
 
 .narrowHeader{
@@ -75,22 +77,40 @@ body{
     text-align: center;
     border-style: solid;
     border-width: 1px;
-    background: white;
+    background: rgb(0,255,255);
     display: inline;
 }
 
 .counter{
     width:300px;
-    
-    background-color: rgb(255,105,180);
+    background-color: rgb(0,255,255);
     display: flex;
     justify-content: space-between;
-    color: white;
+    border-style: solid;
+    border-width: 1px;
 }
 
 .rules{
     width: 300px;
-    height: 125px;
-    background-color: white;
-    
+    height: 80px;
+    background-color: rgb(0,255,255);
+    border-style: solid;
+    border-width: 1px;
+}
+
+#xWins{
+    background-color: rgb(255, 105, 180);
+}
+
+#oWins{
+    background-color: rgb(193,154,107);
+}
+
+#gamesPlayed big{
+    font-size: 30px;
+}
+
+#wins{
+    font-size: 28px;
+    text-align: center;
 }
