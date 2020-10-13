@@ -10,6 +10,8 @@ let win = false; //Used later to determine on last turn if the game is a tie
 let playerTurn=document.querySelector(`.messageBox`); //Used to update the color on the Player Turn box
 let xWins = 0; //Number of games X won
 let oWins = 0; //Number of games O won
+let xColor="rgb(255, 105, 180)"; //Default color of X tiles
+let oColor = "rgb(230, 210, 182)"; //Default color of O tiles
 
 function startGame() {
   const boxes = document.querySelectorAll(".tttbox");
@@ -22,7 +24,7 @@ function startGame() {
   turnsPlayed = 0; //resets the turn count
   choices = []; //Initialize the choices on new game
   win=false; //Initialize the win situation to be false
-  playerTurn.setAttribute("style","background: rgb(230, 210, 182)");
+  playerTurn.setAttribute("style",`background: ${xColor}`);
   
 }
 
@@ -42,19 +44,15 @@ function takeTurn(selectedButton) { //Uses the information about the selected ti
 
       switch (whoseTurn[turnsPlayed]) {
         case "x":
-            playerTurn.setAttribute("style","background: rgb(0, 0, 255)");
-          selectedButton.setAttribute(
-            "style",
-            "background: rgb(230, 210, 182);"
-          );
-          selectedButton.innerText="X";
+            playerTurn.setAttribute("style",`background: ${oColor}`);
+            selectedButton.setAttribute("style",`background: ${xColor}`);
+            selectedButton.innerText="X";
           recordTurn("x", pos); //Changes the color of the tile to be that of what X selected
           break;
 
         case "o":
-          playerTurn.setAttribute("style","background: rgb(230, 210, 182)");
-          selectedButton.setAttribute("style", "background-color: rgb(0, 0, 255)");
-          selectedButton.color= "rgb(0,0,0)";
+          playerTurn.setAttribute("style",`background: ${xColor}`);
+          selectedButton.setAttribute("style", `background: ${oColor}`);
           selectedButton.innerText="O";
           recordTurn("o", pos); //Changes the color of the tile to be that of what O selected
           break;
