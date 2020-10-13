@@ -22,7 +22,9 @@ function startGame() {
   displayCounter();
 }
 
-function takeTurn(selectedButton, pos) { //Takes in the ID and position of the tile.
+function takeTurn(selectedButton) { //Uses the information about the selected tile.
+    let pos = selectedButton.id; //Makes the tile ID its position.
+    
   //Takes id of selected tile and updates the color appropriately
     if (validateTile(selectedButton)) {
     //If the selected tile wasn't previously selected, do the following
@@ -144,50 +146,9 @@ document.querySelector(".new").addEventListener("click", () => {
 
 //Below initiate the sequence of events when a particular tile is clicked:
 
-// const boxes = document.querySelectorAll(".tttbox");
-// boxes.forEach(function (box) {
-//   box.addEventListener("click", function () {
-//     takeTurn(this);
-//   });
-// });
-
-
- document.querySelector("#a").addEventListener("click", () => {
-   takeTurn(a,0);
- });
- document.querySelector("#b").addEventListener("click", () => {
-   takeTurn(b,1);
- });
- document.querySelector("#c").addEventListener("click", () => {
-   takeTurn(c,2);
- });
- document.querySelector("#d").addEventListener("click", () => {
-   takeTurn(d,3);
- });
- document.querySelector("#e").addEventListener("click", () => {
-   takeTurn(e,4);
- });
- document.querySelector("#f").addEventListener("click", () => {
-   takeTurn(f,5);
- });
- document.querySelector("#g").addEventListener("click", () => {
-   takeTurn(g,6);
- });
- document.querySelector("#h").addEventListener("click", () => {
-   takeTurn(h,7);
- });
- document.querySelector("#i").addEventListener("click", () => {
-   takeTurn(i,8);
- });
-
-// console.log(playArray);
-
-// for(let i=0;i<testArray.length;i++){
-//     if(testArray[i].length==3)
-//   console.log("winner", testArray[i]);
-// }
-
-
-// console.log(document.querySelectorAll('.tttbox'))
-
-
+const boxes = document.querySelectorAll(".tttbox");
+boxes.forEach(function (box) {
+box.addEventListener("click", function () {
+takeTurn(this);
+});
+});
