@@ -70,7 +70,7 @@ function takeTurn(selectedButton) { //Uses the information about the selected ti
       }
       if(turnsPlayed>=8 || win==true){ //If the game is over via win or tie
         playerTurn.setAttribute("style",`background: "white"`);
-                playerTurn.innerHTML=`No more turns allowed<br>Game Over`; //Set turn box to be white with message
+                playerTurn.innerHTML=`Game Over<br>No more turns allowed`; //Set turn box to be white with message
       }
       else{}
 
@@ -154,7 +154,7 @@ function finishGame(result) {
 function displayCounter(){
     document.querySelector('#xWins').innerText=`X has won ${xWins} games.`;
     document.querySelector('#oWins').innerText=`O has won ${oWins} games.`;
-    document.querySelector('#gamesPlayed').innerText=`${gamesPlayed} games have been played.`;
+    document.querySelector('#gamesPlayed').innerText=`Games played: ${gamesPlayed}`;
 }
 
 //When New Game button is selected, a new game is initiated

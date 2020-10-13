@@ -81,10 +81,16 @@ body{
 
 .counter{
     width:300px;
-    height: 50px;
+    
     background-color: rgb(255,105,180);
     display: flex;
     justify-content: space-between;
     color: white;
 }
 
+.rules{
+    width: 300px;
+    height: 125px;
+    background-color: white;
+    
+}
