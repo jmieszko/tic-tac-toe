@@ -37,8 +37,10 @@ function takeTurn(selectedButton) { //Uses the information about the selected ti
     //If the selected tile wasn't previously selected, do the following
 
     if (!gameInProgress) {
-      //Validates that a game has not already started. If a game hast started, alert the user.
-      alert("Game is over.  Click on New Game to start.");
+      //Validates that a game has not already started. If a game hast started, put a message.
+      playerTurn.setAttribute("style",`background: red`);
+      playerTurn.innerHTML=`Click on New Game to start.`;
+  
       return;
     } else {
       //If a game has already started
@@ -50,7 +52,7 @@ function takeTurn(selectedButton) { //Uses the information about the selected ti
           
           if(turnsPlayed<8){ //If the number of turns exceeds 9, then this produces an error
           playerTurn.setAttribute("style",`background: ${oColor}`);
-          playerTurn.innerHTML=`Player Turn:<br>${whoseTurn[turnsPlayed+1].toUpperCase()}`;
+          playerTurn.innerHTML=`Player Turn:<br>${whoseTurn[turnsPlayed+1].toUpperCase()}`; //Sets message box it's O's turn
           }
           
           recordTurn("x", pos); //Changes the color of the tile to be that of what X selected
@@ -63,16 +65,12 @@ function takeTurn(selectedButton) { //Uses the information about the selected ti
           
           if(turnsPlayed<8){
                 playerTurn.setAttribute("style",`background: ${xColor}`);
-                playerTurn.innerHTML=`Player Turn:<br>${whoseTurn[turnsPlayed+1].toUpperCase()}`;
+                playerTurn.innerHTML=`Player Turn:<br>${whoseTurn[turnsPlayed+1].toUpperCase()}`; //Sets message box it's X's turn
           }
          recordTurn("o", pos); //Changes the color of the tile to be that of what O selected
           break;
       }
-      if(turnsPlayed>=8 || win==true){ //If the game is over via win or tie
-        playerTurn.setAttribute("style",`background: "white"`);
-                playerTurn.innerHTML=`Game Over<br>No more turns allowed`; //Set turn box to be white with message
-      }
-      else{}
+      
 
       turnsPlayed++; //Increment this to ensure that the turn was taken
     }
@@ -84,7 +82,8 @@ function validateTile(tile) {
   //Ensures that the selected tile wasn't previously selected
   
   if (tile.style.background != "white") {
-    alert('Cannot select this tile.');
+    playerTurn.setAttribute("style",`background: red`);
+  playerTurn.innerHTML=`Cannot select this tile`;// alert('Cannot select this tile.');
     return false;
   } else return true;
 }
@@ -104,10 +103,7 @@ function recordTurn(player, pos) {
 }
 
 function validateWinner() { //Compares player's choices to winning combos and determines if there's a winner or, if no matches, a tie
- //   console.log(turnsPlayed, choices, win)
  
-  
-
  if(turnsPlayed<4){
       //Do nothing since there haven't been enough turns played yet to determine a winner
   }
@@ -132,7 +128,12 @@ function validateWinner() { //Compares player's choices to winning combos and de
 function finishGame(result) {
   switch (result) {
     case "win":
-      alert(`Game over. ${whoseTurn[turnsPlayed].toUpperCase()} wins!`); //Notifies if "X" or "O" wins
+      if(whoseTurn[turnsPlayed]=='x'){
+        playerTurn.setAttribute("style",`background: ${xColor}`);
+      }
+      else {playerTurn.setAttribute("style",`background: ${oColor}`);}
+  playerTurn.innerHTML=`Game over. ${whoseTurn[turnsPlayed].toUpperCase()} wins!`;
+   
       win=true; //set win condition to be true as it's not a tie
       
       if(whoseTurn[turnsPlayed] == 'x'){ //If X wins, increment X's win counter.
@@ -142,7 +143,8 @@ function finishGame(result) {
       break;
 
     case "tie":
-      alert(`Tie game`); //Notifies it's a tie game
+      playerTurn.setAttribute("style",`background: rgb(0,255,255)`);
+      playerTurn.innerHTML=`Tie game<br>No more turns allowed`;
       break;
   }
   gameInProgress = false; //Resets the game flag to false so that a new game can begin
@@ -162,7 +164,8 @@ function displayCounter(){
 //When New Game button is selected, a new game is initiated
 document.querySelector(".new").addEventListener("click", () => {
   if (gameInProgress == true) {
-    alert("Game already in progress...finish before starting new");
+    playerTurn.setAttribute("style",`background: red`);
+  playerTurn.innerHTML=`Game already in progress...finish before starting new.`;
   } else {
     startGame();
   }
