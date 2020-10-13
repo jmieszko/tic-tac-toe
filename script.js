@@ -11,7 +11,7 @@ let playerTurn=document.querySelector(`.messageBox`); //Used to update the color
 let xWins = 0; //Number of games X won
 let oWins = 0; //Number of games O won
 let xColor="rgb(255, 105, 180)"; //Default color of X tiles
-let oColor = "rgb(230, 210, 182)"; //Default color of O tiles
+let oColor = "rgb(193, 154, 107)"; //Default color of O tiles
 
 function startGame() {
   const boxes = document.querySelectorAll(".tttbox");
@@ -25,6 +25,7 @@ function startGame() {
   choices = []; //Initialize the choices on new game
   win=false; //Initialize the win situation to be false
   playerTurn.setAttribute("style",`background: ${xColor}`);
+  playerTurn.innerHTML=`Player Turn:<br>${whoseTurn[turnsPlayed].toUpperCase()}`;
   
 }
 
@@ -44,16 +45,37 @@ function takeTurn(selectedButton) { //Uses the information about the selected ti
 
       switch (whoseTurn[turnsPlayed]) {
         case "x":
-            playerTurn.setAttribute("style",`background: ${oColor}`);
-            selectedButton.setAttribute("style",`background: ${xColor}`);
-            selectedButton.innerText="X";
+          selectedButton.setAttribute("style", `background: ${xColor}`);
+          selectedButton.innerText="X";
+          console.log(win);
+            if(turnsPlayed<8){
+                playerTurn.setAttribute("style",`background: ${oColor}`);
+                playerTurn.innerHTML=`Player Turn:<br>${whoseTurn[turnsPlayed+1].toUpperCase()}`;
+                
+            }
+            else {
+                playerTurn.setAttribute("style",`background: "white"`);
+                playerTurn.innerHTML=`No more turns allowed<br>Game Over`;
+            }
+          
           recordTurn("x", pos); //Changes the color of the tile to be that of what X selected
           break;
 
         case "o":
-          playerTurn.setAttribute("style",`background: ${xColor}`);
+          console.log(win);
           selectedButton.setAttribute("style", `background: ${oColor}`);
-          selectedButton.innerText="O";
+          selectedButton.innerText="O";    
+        
+          if(turnsPlayed<8){
+                playerTurn.setAttribute("style",`background: ${xColor}`);
+                playerTurn.innerHTML=`Player Turn:<br>${whoseTurn[turnsPlayed+1].toUpperCase()}`;
+            }
+            else {
+                playerTurn.setAttribute("style",`background: "white"`);
+                playerTurn.innerHTML=`No more turns allowed<br>Game Over`;
+            }
+                   
+        
           recordTurn("o", pos); //Changes the color of the tile to be that of what O selected
           break;
       }
@@ -161,3 +183,5 @@ takeTurn(this);
 });
 
 displayCounter(); //Called here so that when the page loads, the counters are already displaying.
+
+console.log(document.querySelector('.messageBox').attributes)
