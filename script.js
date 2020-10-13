@@ -47,38 +47,32 @@ function takeTurn(selectedButton) { //Uses the information about the selected ti
         case "x":
           selectedButton.setAttribute("style", `background: ${xColor}`);
           selectedButton.innerText="X";
-          console.log(win);
-            if(turnsPlayed<8){
-                playerTurn.setAttribute("style",`background: ${oColor}`);
-                playerTurn.innerHTML=`Player Turn:<br>${whoseTurn[turnsPlayed+1].toUpperCase()}`;
-                
-            }
-            else {
-                playerTurn.setAttribute("style",`background: "white"`);
-                playerTurn.innerHTML=`No more turns allowed<br>Game Over`;
-            }
+          
+          if(turnsPlayed<8){ //If the number of turns exceeds 9, then this produces an error
+          playerTurn.setAttribute("style",`background: ${oColor}`);
+          playerTurn.innerHTML=`Player Turn:<br>${whoseTurn[turnsPlayed+1].toUpperCase()}`;
+          }
           
           recordTurn("x", pos); //Changes the color of the tile to be that of what X selected
           break;
 
         case "o":
-          console.log(win);
-          selectedButton.setAttribute("style", `background: ${oColor}`);
-          selectedButton.innerText="O";    
         
+          selectedButton.setAttribute("style", `background: ${oColor}`);
+          selectedButton.innerText="O";   
+          
           if(turnsPlayed<8){
                 playerTurn.setAttribute("style",`background: ${xColor}`);
                 playerTurn.innerHTML=`Player Turn:<br>${whoseTurn[turnsPlayed+1].toUpperCase()}`;
-            }
-            else {
-                playerTurn.setAttribute("style",`background: "white"`);
-                playerTurn.innerHTML=`No more turns allowed<br>Game Over`;
-            }
-                   
-        
-          recordTurn("o", pos); //Changes the color of the tile to be that of what O selected
+          }
+         recordTurn("o", pos); //Changes the color of the tile to be that of what O selected
           break;
       }
+      if(turnsPlayed>=8 || win==true){ //If the game is over via win or tie
+        playerTurn.setAttribute("style",`background: "white"`);
+                playerTurn.innerHTML=`No more turns allowed<br>Game Over`; //Set turn box to be white with message
+      }
+      else{}
 
       turnsPlayed++; //Increment this to ensure that the turn was taken
     }
@@ -100,14 +94,13 @@ function recordTurn(player, pos) {
     switch (player) {
     case "x":
      choices[pos] = player; //Updates the choices array with X at the position of the tile
-     validateWinner();
-      break;
+     break;
 
     case "o":
       choices[pos] = player; //Updates the choices array with O at the position of the tile
-      validateWinner();
       break;
   }
+  validateWinner();
 }
 
 function validateWinner() { //Compares player's choices to winning combos and determines if there's a winner or, if no matches, a tie
@@ -182,6 +175,9 @@ takeTurn(this);
 });
 });
 
+//Initialization of certain features at page load
 displayCounter(); //Called here so that when the page loads, the counters are already displaying.
+playerTurn.setAttribute("style",`background: "white"`);
+playerTurn.innerHTML=`Press New Game<br>to start new game`;
 
 console.log(document.querySelector('.messageBox').attributes)
