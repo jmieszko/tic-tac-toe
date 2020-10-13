@@ -152,11 +152,11 @@ function finishGame(result) {
 }
 
 function displayCounter(){
-  let ties=gamesPlayed -xWins - oWins
+  let ties=gamesPlayed -xWins - oWins //Calculate the ties used in the stats at bottom of screen
     document.querySelector('#xWins').innerHTML=`X: &nbsp ${xWins}`;
     document.querySelector('#ties').innerHTML=`Ties: ${ties}`;
     document.querySelector('#oWins').innerHTML=`O: &nbsp ${oWins}`;
-   // document.querySelector('#gamesPlayed').innerHTML=`Games played: &nbsp <big>${gamesPlayed}</big>`;
+   
 }
 
 //When New Game button is selected, a new game is initiated
@@ -177,9 +177,7 @@ takeTurn(this);
 });
 });
 
-//Initialization of certain features at page load
+//Initialization of certain features at initial page load
 displayCounter(); //Called here so that when the page loads, the counters are already displaying.
-playerTurn.setAttribute("style",`background: "white"`);
+playerTurn.setAttribute("style",`background: "white"`); //Turn box is white with instructions to begin playing
 playerTurn.innerHTML=`Press New Game<br>to start new game`;
-
-console.log(document.querySelector('.messageBox').attributes)
