@@ -7,24 +7,28 @@ let whoseTurn = ["x", "o", "x", "o", "x", "o", "x", "o", "x"]; //keeps track of 
 let choices = []; //choices, by player, which will be used to compare against winners
 let winners = [ [0,1,2], [0,4,8], [0,3,6], [1,4,7], [2,5,8], [3,4,5], [6,7,8], [2,4,6]]; //winning combinations of tiles by index.
 let win = false; //Used later to determine on last turn if the game is a tie
-
+let playerTurn=document.querySelector(`.messageBox`); //Used to update the color on the Player Turn box
 let xWins = 0; //Number of games X won
 let oWins = 0; //Number of games O won
 
 function startGame() {
-  for (let i = 0; i < document.querySelectorAll(".tttbox").length; i++) {
-    document.querySelectorAll(".tttbox")[i].style.background = "white"; //Resets the color of all tiles to white
-  }
+  const boxes = document.querySelectorAll(".tttbox");
+  boxes.forEach(box => {
+  box.style.background = "white"; //Resets the color of all tiles to white
+    box.innerText=""; //Resets the text of all tiles to be blank
+  });
+
   gameInProgress = true; //Confirms game is in progress; clicking on New Game produces error
   turnsPlayed = 0; //resets the turn count
   choices = []; //Initialize the choices on new game
-  win=false;
-  displayCounter();
+  win=false; //Initialize the win situation to be false
+  playerTurn.setAttribute("style","background: rgb(230, 210, 182)");
+  
 }
 
 function takeTurn(selectedButton) { //Uses the information about the selected tile.
     let pos = selectedButton.id; //Makes the tile ID its position.
-    
+
   //Takes id of selected tile and updates the color appropriately
     if (validateTile(selectedButton)) {
     //If the selected tile wasn't previously selected, do the following
@@ -38,15 +42,20 @@ function takeTurn(selectedButton) { //Uses the information about the selected ti
 
       switch (whoseTurn[turnsPlayed]) {
         case "x":
+            playerTurn.setAttribute("style","background: rgb(0, 0, 255)");
           selectedButton.setAttribute(
             "style",
             "background: rgb(230, 210, 182);"
           );
+          selectedButton.innerText="X";
           recordTurn("x", pos); //Changes the color of the tile to be that of what X selected
           break;
 
         case "o":
-          selectedButton.setAttribute("style", "background: rgb(0, 0, 255);");
+          playerTurn.setAttribute("style","background: rgb(230, 210, 182)");
+          selectedButton.setAttribute("style", "background-color: rgb(0, 0, 255)");
+          selectedButton.color= "rgb(0,0,0)";
+          selectedButton.innerText="O";
           recordTurn("o", pos); //Changes the color of the tile to be that of what O selected
           break;
       }
@@ -152,3 +161,5 @@ box.addEventListener("click", function () {
 takeTurn(this);
 });
 });
+
+displayCounter(); //Called here so that when the page loads, the counters are already displaying.
