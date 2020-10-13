@@ -1,8 +1,18 @@
 body{
    background: rgb(122, 255, 151);
+   /*background-image: url("https://www.featurepics.com/StockImage/20160903/tic-tac-toe-game-stock-image-4209370.jpg");
+   background-position: center;
+   background-repeat: no-repeat;
+   background-size: cover;*/
+   display: flex;
 }
-.playBoard{
-    flex-direction:row;
+.gameBoard{
+    flex-direction:column;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
     
 }
 .tileBoard{
@@ -10,10 +20,13 @@ body{
     height: 300px;
     background-color: black;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between ;
+    margin-left: auto;
+    margin-right: auto;
+   padding: 5px;
 }
 
-.tttbox{
+.tttbox{ /*Each tic tac toe box*/
     width: 75px;
     height: 75px;
     background-color: white;
@@ -22,14 +35,15 @@ body{
     flex-direction: row;
     font-size: 70px;
     text-align: center;
-   
+    
     
 }
 
-.new{
+.new{  /*controls the New Game box*/
     width: 100px;
     height: 50px;
-
+    
+    
 }
 
 .messageBox{
@@ -40,6 +54,8 @@ body{
     border-style: solid;
     border-width: 1px;
     background: white;
+    
+    
 }
 
 .wideHeader{
@@ -71,3 +87,4 @@ body{
     justify-content: space-between;
     color: white;
 }
+
