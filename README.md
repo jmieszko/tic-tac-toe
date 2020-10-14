@@ -1,12 +1,15 @@
+<h1>Project 1:  Tic Tac Toe</h1>
+<h2>Introduction</h2>
+This is the first project for the GA SEI.  The requirements were to construct an interactive webpage that would enable the user to play games of tic-tac-toe.<br><br>
 <h2>Primary User Stories for MVP:</h2>
 <ul>
-<li>As a user, I should be able to start a new tic tac toe game</li>
-<li>As a user, I should be able to click on a square to add X first and then O, and so on</li>
-<li>As a user, I should be shown a message after each turn for if I win, lose, tie or who's turn it is next</li>
-<li>As a user, I should not be able to click the same square twice</li>
-<li>As a user, I should be shown a message when I win, lose or tie</li>
-<li>As a user, I should not be able to continue playing once I win, lose, or tie</li>
-<li>As a user, I should be able to play the game again without refreshing the page</li>
+<li>As a user, I want to be able to start a new tic tac toe game so that I can play.</li>
+<li>As a user, I want to be able to click on a square to add X first and then O, and so on so that I can win.</li>
+<li>As a user, I want to be shown a message after each turn for if I win, lose, tie or who's turn it is next so that I know the status of the game.</li>
+<li>As a user, I want to not be able to click the same square twice as that is not allowed.</li>
+<li>As a user, I want to be shown a message when I win, lose or tie so that I know the status of the game.</li>
+<li>As a user, I do not want to be able to continue playing once I win, lose, or tie as that is the end of the game.</li>
+<li>As a user, I want to be able to play the game again without refreshing the page so that I can continue playing uninterrupted.</li>
 </ul><br>
 <h2>Additional Features Implemented:</h2>
 <ul>
@@ -16,13 +19,15 @@
 <h2>Approach</h2>
 <ul><li>For the UI, the goal was to keep it as simple as possible on a canvas that would fit a PC monitor as well as an iPhone XS without the need to scroll.
 <li>The game tiles are large enough to either tap or click.
-<li>A message box at the top of the board would change to the color of the current user's turn. If a game is not in progress, then a message would state to click on a new game. The message box would also inform the user if they clicked on an already chosen tile.  Originally, the latter two points were alerts but later reworked into the message box.
+<li>A message box at the top of the board would change to the color of the current user's turn. If a game is not in progress, then a message would state to click on a new game. The message box would also inform the user if they clicked on an already chosen tile.  Originally, the latter two points were alerts but later reworked into the message box.</ul>
 <h2>Wireframe:</h2> 
 This was significantly altered in favor of a cleaner design and space constraints, i.e. fitting on an iPhone XS screen.
 <img src="tictactoe_wireframe_dim.jpg">
 
 <h2>Technologies used:</h2>
 <h3>HTML</h3>
+<ul><li>Used custom divs for the various elements on the page.
+<li>The tiles were divided into sections</ul>
 <h3>CSS</h3>
 <ul><li>Arranged everything in vertical grids to keep the UI as clean as possible with the intent of fitting on an iPhone XS screen and scaling to PC monitors.</li>
 </ul>
@@ -38,7 +43,7 @@ This was significantly altered in favor of a cleaner design and space constraint
 
 <li>Each tile has a 'click' event handler which calls the takeTurn function.
 </ul>
-<h4>https://hackernoon.com/building-tictactoe-using-vanilla-javascript-kt2b32mp was a resource used for inspiration in determining the winner. In previous attempts, I compared the player selections to the winning scenarios; however, it always took into account the middle tile even when that was not part of the winning combination. This site demonstrated comparing the winning scenarios to the player selections.</h4>
+https://hackernoon.com/building-tictactoe-using-vanilla-javascript-kt2b32mp was a resource used for inspiration in determining the winner. In previous attempts, I compared the player selections to the winning scenarios; however, it always took into account the middle tile even when that was not part of the winning combination. This site demonstrated comparing the winning scenarios to the player selections instead which made the code much more efficient.
 
 
 
